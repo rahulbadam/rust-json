@@ -15,7 +15,8 @@ struct Book {
 }
 
 fn main() {
-    let json = r#"
+    let json = {
+        r#"
     {
         "name" : "book1",
         "author" : "rahul",
@@ -31,8 +32,16 @@ fn main() {
                 "name":"stroy 3"
             }
         ]
-    }"#;
+    }"#
+    };
+
+    // json to obj
     let parsed: Book = parsed_json(json);
+
+    // obj to json
+    let parse_json = serde_json::to_string(&parsed).unwrap();
+    println!("json {}", parse_json);
+
     for story_name in parsed.stories {
         println!("Story Name{}", story_name.name);
     }
